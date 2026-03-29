@@ -1,19 +1,22 @@
 package entities;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
     // definir atributos privados
 
-    private String id_usuario;
+    private int id_usuario;
     private String name;
     private String email;
+    private int telefono;
     private List<Libro> libros_prestados = new ArrayList<Libro>();
 
-    public Usuario(String id_usuario, String name, String email) {
-        this.id_usuario=id_usuario;
-        this.name=name;
-        this.email=email;
+    public Usuario(int id_usuario, String name, String email, int telefono) {
+        this.id_usuario = id_usuario;
+        this.name = name;
+        this.email = email;
+        this.telefono = telefono;
     }
 
     public String getName() {
@@ -23,7 +26,11 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario [id_usuario=" + id_usuario + ", name=" + name + ", email=" + email + ", libros_prestados="
-                + libros_prestados + "]";
+                + libros_prestados + telefono + "]";
+    }
+
+    public int getId(int id_usuario) {
+        return id_usuario;
     }
 
 }

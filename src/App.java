@@ -1,59 +1,139 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import entities.Biblioteca;
 import entities.Libro;
+import entities.Usuario;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-        // Dar la bienvenida al sistema.
-        System.out.println(
-                "-----Bienvenido al sistema de gestión de biblioteca----- \n ¿Qué desea hacer hoy? \n 1. Gestion Libros \n 2. Gestión Usuarios \n 3. Gestion Historial Prestamo");
-
         Scanner sc = new Scanner(System.in);
-        System.out.println("Por favor, dijita un numero según las opciones:");
-
-        int opcion = sc.nextInt();
-        // while para poder eleguir la opción segun lo que dijite el usuario
         Biblioteca b = new Biblioteca();
-        while (opcion == 1) {
-            System.out.println(
-                    "----Gestion de Libros: \n 1. Ver Catalogo \n 2. Agregar Libro \n 3. Borrar Libro.");
-            int opcionLibros = sc.nextInt();
-            switch (opcionLibros) {
-                case 1:
-                    b.verCatalogo(null);
-                    break;
-                case 2:
+        int opcion = 0;
 
-                    System.out.println("Por favor, ingresa los siguientes datos:");
-                    // Pedir los datos que tiene la clase Libro
-                    int id_libro = b.generar_nuevo_id();
+        // do-while para que el menú se muestre al menos una vez
+        do {
+            try {
+                System.out.println("\n-----Bienvenido al sistema de gestión de biblioteca-----");
+                System.out.println("1. Gestión Libros");
+                System.out.println("2. Gestión Usuarios");
+                System.out.println("3. Gestión Historial Préstamo");
+                System.out.println("0. Salir");
+                System.out.print("Por favor, digita una opción: ");
 
-                    System.out.println("Titulo del libro:");
-                    String titulo = sc.nextLine();
-                    sc.nextLine();
+                opcion = sc.nextInt();
+                sc.nextLine(); // !!! LIMPIAR BÚFER después de nextInt()
 
-                    System.out.println("Autor del libro:");
-                    String autor = sc.nextLine();
-                    sc.nextLine();
+                switch (opcion) {
+                    case 1:
+                        boolean menuLibro = false;
+                        while (!menuLibro) {
+                            System.out.println("\n---- Gestión de Libros ----");
+                            System.out.println(
+                                    "1. Ver Catálogo \n2. Agregar Libro \n3. Borrar Libro \n4. Volver al Menú Principal");
+                            int opcionLibros = sc.nextInt();
+                            sc.nextLine(); // !!! LIMPIAR BÚFER
 
-                    Libro l = new Libro(id_libro, titulo, autor);
-                    l.setId(id_libro);
+                            switch (opcionLibros) {
+                                case 1:
+                                    b.verCatalogo(null);
+                                    break;
+                                case 2:
+                                    int id_libro = b.generar_nuevo_id();
+                                    System.out.print("Título del libro: ");
+                                    String titulo = sc.nextLine();
+                                    System.out.print("Autor del libro: ");
+                                    String autor = sc.nextLine();
 
-                    b.agregarLibro(l);
-                    break;
-                case 3:
-                    System.out.println("Ingrese el id a eliminar:");
-                    int id = sc.nextInt();
-                    b.borrarLibro(id);
-                    break;
-                default:
-                    break;
+                                    Libro l = new Libro(id_libro, titulo, autor);
+                                    b.agregarLibro(l);
+                                    System.out.println("Libro agregado con éxito.");
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese el ID a eliminar: ");
+                                    int id = sc.nextInt();
+                                    sc.nextLine(); // !!! LIMPIAR BÚFER
+                                    b.borrarLibro(id);
+                                    break;
+                                case 4:
+                                    menuLibro = true;
+                                    break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        boolean menuUsuario = false;
+                        while (!menuUsuario) {
+                            System.out.println("\n---- Gestión de Usuarios ----");
+                            System.out.println(
+                                    "1. Ver Usuario \n2. Agregar Usuario \n3. Borrar Usuario  \n4. Volver al Menú Principal");
+                            int opcionUsuario = sc.nextInt();
+                            sc.nextLine(); // !!! LIMPIAR BÚFER
+                            switch (opcionUsuario) {
+                                case 1:
+                                    b.verUsuarios();
+                                    break;
+                                case 2:
+                                    int id_usuario = b.generar_nuevo_id();
+                                    System.out.println("Nombre del usuario:");
+                                    String nombre = sc.nextLine();
+                                    System.out.println("Email del usuario:");
+                                    String email = sc.nextLine();
+                                    System.out.println("Telefono del usuario:");
+                                    int telefono = sc.nextInt();
+
+                                    // agregar usuario llamando a la clase usuario
+                                    Usuario usuario = new Usuario(id_usuario, nombre, email, telefono);
+                                    b.agregarUsuarios(usuario);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese el ID del usuario a eliminar: ");
+                                    int id = sc.nextInt();
+                                    sc.nextLine(); // !!! LIMPIAR BÚFER
+                                    b.borrarUsuario(id);
+                                    break;
+                                case 4:
+                                    menuUsuario = true;
+                                    break;
+                            }
+
+                        }
+                        break;
+                    case 3:
+                        boolean menuPrestamo = false;
+                        while (!menuPrestamo) {
+                            System.out.println("\n -----Gestión de Prestamo-----");
+                            System.out.println(
+                                    "1. Ver Usuario \n2. Agregar Usuario \n3. Borrar Usuario  \n4. Volver al Menú Principal");
+                            int opcionPrestamo = sc.nextInt();
+                            sc.nextInt();
+                            switch (opcionPrestamo) {
+                                case 1:
+
+                                    break;
+                                case 4:
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+
+                    case 0:
+                        System.out.println("Saliendo del sistema...");
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                        break;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Error debe ingresar un numero");
+                sc.nextLine();
+                opcion = -1;
             }
 
-        }
+        } while (opcion != 0);
 
-        sc.close();
+        sc.close(); // Se cierra solo al final de todo el programa
     }
 }

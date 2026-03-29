@@ -35,6 +35,7 @@ public class Biblioteca {
         // libro.getId(id_libro);
         catalogo.agregarElemento(libro);
         historialNuevos.apilar(libro);
+        System.out.println("Libro creado correctamente");
 
     }
 
@@ -74,9 +75,42 @@ public class Biblioteca {
         }
     }
 
+    // Metodo para ver usuarios
+    public void verUsuarios() {
+        usuarios.imprimirElementos();
+    }
+
     // Creación de metodo para Gestion de Usuarios
     public void agregarUsuarios(Usuario usuario) {
         usuarios.agregarElemento(usuario);
+        System.out.println("Usuario creado correctamente");
+    }
+
+    // Metodo para buscar usuario por id
+    public Usuario buscarUsuarioPorId(int id) {
+        Nodo<Usuario> actual = usuarios.getCabeza();
+
+        while (actual != null) {
+            Usuario usuario = actual.getDato();
+
+            if (usuario.getId(id) == id) {
+                return usuario;
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        return null;
+    }
+
+    // Metodo para eliminar el usuario
+    public void borrarUsuario(int id_dato) {
+        Usuario usuarioAEliminar = buscarUsuarioPorId(id_dato);
+        if (usuarioAEliminar != null) {
+            usuarios.eliminarElemento(usuarioAEliminar);
+        } else {
+            System.out.println("Usuario no encontrado");
+        }
     }
 
 }
