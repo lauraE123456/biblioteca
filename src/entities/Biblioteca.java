@@ -55,7 +55,7 @@ public class Biblioteca {
         while (actual != null) {
             Libro libro = actual.getDato();
 
-            if (libro.getId(id) == id) {
+            if (libro.getId() == id) {
                 return libro;
             }
 

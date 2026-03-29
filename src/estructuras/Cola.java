@@ -17,8 +17,17 @@ public class Cola<T> {
     }
 
     // Metodo para atender primero a la persona que ingreso por el libro
-    public void desencolar(T elemento) {
-        fila.remove(elemento);
+    public T desencolar(T elemento) {
+        if (fila.isEmpty()) {
+            return null;
+        }
+        // extrae y elimina el primer elemento
+        return fila.poll();
+    }
+
+    // Metodo para ver quien sigue en la fila sin sacarlo
+    public T verPrimero() {
+        return fila.peek();
     }
 
 }

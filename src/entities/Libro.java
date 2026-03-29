@@ -53,7 +53,7 @@ public class Libro {
         this.isbn = id_libro;
     }
 
-    public int getId(int isbn) {
+    public int getId() {
         return isbn;
     }
 

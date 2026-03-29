@@ -66,7 +66,7 @@ public class ListaEnlazada<T> {
 
     }
 
-    // Obtener cabeza (para recorrer desde fuera)
+    // Obtener cabeza (para recorrer fuera de esta clase)
     public Nodo<T> getCabeza() {
         return cabeza;
     }
