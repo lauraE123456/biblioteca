@@ -29,7 +29,7 @@ public class Usuario {
                 + libros_prestados + telefono + "]";
     }
 
-    public int getId(int id_usuario) {
+    public int getId() {
         return id_usuario;
     }
 

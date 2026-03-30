@@ -6,7 +6,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private EstadoLibro estado;
-    private String possedor_id;
+    private int possedor_id;
 
     // Constructor para la clase libro
     public Libro(int isbn, String titulo, String autor) {
@@ -14,7 +14,7 @@ public class Libro {
         this.titulo = titulo;
         this.autor = autor;
         this.estado = EstadoLibro.DISPONIBLE;
-        this.possedor_id = null;
+        this.possedor_id = 0;
     }
 
     public String getName() {
@@ -41,11 +41,11 @@ public class Libro {
         this.estado = estado;
     }
 
-    public String getPossedor_id() {
+    public int getPossedor_id() {
         return possedor_id;
     }
 
-    public void setPossedor_id(String possedor_id) {
+    public void setPossedor_id(int possedor_id) {
         this.possedor_id = possedor_id;
     }
 

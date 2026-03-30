@@ -38,7 +38,7 @@ public class App {
                                     b.verCatalogo(null);
                                     break;
                                 case 2:
-                                    int id_libro = b.generar_nuevo_id();
+                                    int id_libro = b.generarIdLibro();
                                     System.out.print("Título del libro: ");
                                     String titulo = sc.nextLine();
                                     System.out.print("Autor del libro: ");
@@ -73,7 +73,7 @@ public class App {
                                     b.verUsuarios();
                                     break;
                                 case 2:
-                                    int id_usuario = b.generar_nuevo_id();
+                                    int id_usuario = b.generarIdUsuario();
                                     System.out.println("Nombre del usuario:");
                                     String nombre = sc.nextLine();
                                     System.out.println("Email del usuario:");
@@ -103,14 +103,22 @@ public class App {
                         while (!menuPrestamo) {
                             System.out.println("\n -----Gestión de Prestamo-----");
                             System.out.println(
-                                    "1. Ver Usuario \n2. Agregar Usuario \n3. Borrar Usuario  \n4. Volver al Menú Principal");
+                                    "1. Prestar libro \n2. Devolver libro \n3. Ver lista de Espera   \n4. Ver ultimas acciones\n5. Volver al Menú Principal");
                             int opcionPrestamo = sc.nextInt();
-                            sc.nextInt();
+                            sc.nextLine();
                             switch (opcionPrestamo) {
                                 case 1:
+                                    System.out.println(
+                                            "--------Bienvenido a la sesión de prestar.-------- \n por favor, Ingrese:");
+                                    System.out.println(" ID Usuario:");
+                                    int id_usuario = sc.nextInt();
+                                    System.out.println("ID Libro");
+                                    int id_libro = sc.nextInt();
 
+                                    b.prestarLibro(id_usuario, id_libro);
                                     break;
                                 case 4:
+                                    menuPrestamo = true;
                                     break;
                                 default:
                                     break;

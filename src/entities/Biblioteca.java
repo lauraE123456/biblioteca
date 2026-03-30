@@ -7,7 +7,8 @@ import estructuras.Pila;
 
 public class Biblioteca {
 
-    private int contadorLibros;
+    private int contadorLibro;
+    private int contadorUsuario;
     // Definir atributos privados
 
     private ListaEnlazada<Libro> catalogo;
@@ -21,12 +22,16 @@ public class Biblioteca {
         this.usuarios = new ListaEnlazada<>();
         this.historialNuevos = new Pila<>();
         this.listaEspera = new Cola<>();
-        this.contadorLibros = 0;
+        this.contadorLibro = 0;
+        this.contadorUsuario = 0;
     }
 
-    public int generar_nuevo_id() {
-        contadorLibros++;
-        return contadorLibros;
+    public int generarIdUsuario() {
+        return ++contadorLibro;
+    }
+
+    public int generarIdLibro() {
+        return ++contadorUsuario;
     }
 
     // Creación de metodos para Gestion de Libro
@@ -93,7 +98,7 @@ public class Biblioteca {
         while (actual != null) {
             Usuario usuario = actual.getDato();
 
-            if (usuario.getId(id) == id) {
+            if (usuario.getId() == id) {
                 return usuario;
             }
 
@@ -110,6 +115,30 @@ public class Biblioteca {
             usuarios.eliminarElemento(usuarioAEliminar);
         } else {
             System.out.println("Usuario no encontrado");
+        }
+    }
+
+    // Metodo para prestar libro y usar la cola para agregar
+    public void prestarLibro(int id_usuario, int id_libro) {
+        // Agregar a la lista de espera
+        Libro libro = buscarLibroPorId(id_libro);
+        Usuario usuario = buscarUsuarioPorId(id_usuario);
+        if (usuario == null) {
+            System.out.println("Error, El usuario con ID" + id_usuario + " no existe.");
+            return;
+
+        }
+        if (libro == null) {
+            System.out.println("Error, El libro con ID" + id_libro + " no existe.");
+            return;
+        }
+        if (libro.getEstado() == EstadoLibro.DISPONIBLE) {
+            libro.setEstado(EstadoLibro.PRESTADO);
+            libro.setPossedor_id(id_usuario);
+            System.out.println("Libro prestado con exito al Usuario:" + usuario.getName());
+        } else {
+            System.out.println("El libro está ocupado. Agregando a " + usuario.getName() + " a la lista de espera...");
+            listaEspera.encolar(usuario);
         }
     }
 
