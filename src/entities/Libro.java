@@ -1,5 +1,7 @@
 package entities;
 
+import estructuras.Cola;
+
 public class Libro {
 
     private int isbn;
@@ -7,6 +9,7 @@ public class Libro {
     private String autor;
     private EstadoLibro estado;
     private int possedor_id;
+    private Cola<Usuario> listaEspera;
 
     // Constructor para la clase libro
     public Libro(int isbn, String titulo, String autor) {
@@ -15,6 +18,11 @@ public class Libro {
         this.autor = autor;
         this.estado = EstadoLibro.DISPONIBLE;
         this.possedor_id = 0;
+        this.listaEspera = new Cola<>();
+    }
+
+    public Cola<Usuario> getListaEspera() {
+        return listaEspera;
     }
 
     public String getName() {
@@ -24,7 +32,7 @@ public class Libro {
     @Override
     public String toString() {
         return "Libro [isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", estado=" + estado
-                + ", possedor_id=" + possedor_id + "]";
+                + ", possedor_id=" + possedor_id + "";
     }
 
     // generador de getter y setter-> asegurar la integridad de los datos

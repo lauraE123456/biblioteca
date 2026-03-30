@@ -9,7 +9,6 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Biblioteca b = new Biblioteca();
         int opcion = 0;
-
         // do-while para que el menú se muestre al menos una vez
         do {
             try {
@@ -35,7 +34,7 @@ public class App {
 
                             switch (opcionLibros) {
                                 case 1:
-                                    b.verCatalogo(null);
+                                    b.verCatalogo();
                                     break;
                                 case 2:
                                     int id_libro = b.generarIdLibro();
@@ -106,18 +105,35 @@ public class App {
                                     "1. Prestar libro \n2. Devolver libro \n3. Ver lista de Espera   \n4. Ver ultimas acciones\n5. Volver al Menú Principal");
                             int opcionPrestamo = sc.nextInt();
                             sc.nextLine();
+                            int id_usuario;
+                            int id_libro;
                             switch (opcionPrestamo) {
                                 case 1:
                                     System.out.println(
                                             "--------Bienvenido a la sesión de prestar.-------- \n por favor, Ingrese:");
                                     System.out.println(" ID Usuario:");
-                                    int id_usuario = sc.nextInt();
+                                    id_usuario = sc.nextInt();
                                     System.out.println("ID Libro");
-                                    int id_libro = sc.nextInt();
+                                    id_libro = sc.nextInt();
 
                                     b.prestarLibro(id_usuario, id_libro);
                                     break;
+                                case 2:
+                                    System.out.println(" ID Usuario:");
+                                    id_usuario = sc.nextInt();
+                                    System.out.println("ID Libro");
+                                    id_libro = sc.nextInt();
+                                    b.devolverLibro(id_libro, id_usuario);
+                                    break;
+                                case 3:
+                                    System.out.println("Esta es la lista de espera:");
+                                    b.verListaEspera();
+                                    break;
                                 case 4:
+                                    System.out.println("Estas son las ultimas acciones:");
+                                    b.mostrarUltimaAccion();
+                                    break;
+                                case 5:
                                     menuPrestamo = true;
                                     break;
                                 default:

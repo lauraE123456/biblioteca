@@ -1,6 +1,5 @@
 package entities;
 
-import estructuras.Cola;
 import estructuras.ListaEnlazada;
 import estructuras.Nodo;
 import estructuras.Pila;
@@ -14,14 +13,12 @@ public class Biblioteca {
     private ListaEnlazada<Libro> catalogo;
     private ListaEnlazada<Usuario> usuarios;
     private Pila<Libro> historialNuevos; // Para visualizar los ultimos libros agregados
-    private Cola<Usuario> listaEspera; // Para turnos es espera
 
     public Biblioteca() {
         // Este es el constructor, donde definimos los datos que son necesarios.
         this.catalogo = new ListaEnlazada<>();
         this.usuarios = new ListaEnlazada<>();
         this.historialNuevos = new Pila<>();
-        this.listaEspera = new Cola<>();
         this.contadorLibro = 0;
         this.contadorUsuario = 0;
     }
@@ -44,9 +41,8 @@ public class Biblioteca {
 
     }
 
-    public void verCatalogo(Usuario usuario) {
+    public void verCatalogo() {
         catalogo.imprimirElementos();
-        listaEspera.encolar(usuario);
     }
 
     // Actualizar datos de un libro
@@ -120,26 +116,75 @@ public class Biblioteca {
 
     // Metodo para prestar libro y usar la cola para agregar
     public void prestarLibro(int id_usuario, int id_libro) {
-        // Agregar a la lista de espera
         Libro libro = buscarLibroPorId(id_libro);
         Usuario usuario = buscarUsuarioPorId(id_usuario);
-        if (usuario == null) {
-            System.out.println("Error, El usuario con ID" + id_usuario + " no existe.");
-            return;
 
+        if (usuario == null) {
+            System.out.println("Error, El usuario con ID " + id_usuario + " no existe.");
+            return;
         }
         if (libro == null) {
-            System.out.println("Error, El libro con ID" + id_libro + " no existe.");
+            System.out.println("Error, El libro con ID " + id_libro + " no existe.");
             return;
         }
+
         if (libro.getEstado() == EstadoLibro.DISPONIBLE) {
             libro.setEstado(EstadoLibro.PRESTADO);
             libro.setPossedor_id(id_usuario);
-            System.out.println("Libro prestado con exito al Usuario:" + usuario.getName());
+            System.out.println("Libro prestado con éxito al Usuario: " + usuario.getName());
         } else {
-            System.out.println("El libro está ocupado. Agregando a " + usuario.getName() + " a la lista de espera...");
-            listaEspera.encolar(usuario);
+            System.out.println("El libro está ocupado. Agregando a " + usuario.getName()
+                    + " a la lista de espera del libro " + libro.getName());
+            libro.getListaEspera().encolar(usuario);
         }
     }
 
+    // Metodo para devolver el libro prestado
+    public void devolverLibro(int id_libro, int id_usuario) {
+        Libro libro = buscarLibroPorId(id_libro);
+
+        if (libro != null && libro.getEstado() == EstadoLibro.PRESTADO) {
+            // Revisamos si hay alguien esperando ESTE libro
+            Usuario siguienteUsuario = libro.getListaEspera().desencolar();
+
+            if (siguienteUsuario != null) {
+                System.out.println("El libro devuelto ha sido asignado automáticamente a " + siguienteUsuario.getName()
+                        + " que estaba en la lista de espera.");
+                libro.setPossedor_id(siguienteUsuario.getId());
+                // El estado sigue siendo PRESTADO
+            } else {
+                libro.setEstado(EstadoLibro.DISPONIBLE);
+                libro.setPossedor_id(0);
+                System.out.println("Libro devuelto con éxito. Ahora está disponible.");
+            }
+        } else {
+            System.out.println("El libro no estaba prestado o no existe.");
+        }
+    }
+
+    public void verListaEspera() {
+        Nodo<Libro> actual = catalogo.getCabeza();
+        boolean hayEspera = false;
+
+        while (actual != null) {
+            Libro libro = actual.getDato();
+            if (libro.getListaEspera().verPrimero() != null) {
+                System.out.println("\n--- Esperando por el libro: " + libro.getName() + " ---");
+                libro.getListaEspera().imprimirCola();
+                hayEspera = true;
+            }
+            actual = actual.getSiguiente();
+        }
+
+        if (!hayEspera) {
+            System.out.println("No hay usuarios en lista de espera para ningún libro.");
+        }
+    }
+
+    public void mostrarUltimaAccion() {
+        Libro ultimo = historialNuevos.verUltimo();
+        if (ultimo != null) {
+            System.out.println(ultimo.toString());
+        }
+    }
 }

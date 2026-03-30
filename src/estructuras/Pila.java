@@ -24,8 +24,11 @@ public class Pila<T> {
 
     // Metodo para visualizar el ultimo sin quitarlo
     public T verUltimo() {
-        // usamos operador ternario en lugar de usar if
-        return historial.isEmpty() ? null : historial.peek();
+        if (historial.isEmpty()) {
+            System.out.println("No hay acciones registradas ");
+            return null;
+        }
+        System.out.println("Estas son las ultimas acciones: ");
+        return historial.peek();
     }
-
 }
