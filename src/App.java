@@ -23,6 +23,7 @@ public class App {
                 sc.nextLine(); // !!! LIMPIAR BÚFER después de nextInt()
 
                 switch (opcion) {
+                    // MODULO GESTIÓN DE LIBROS
                     case 1:
                         boolean menuLibro = false;
                         while (!menuLibro) {
@@ -59,6 +60,7 @@ public class App {
                             }
                         }
                         break;
+                    // MODULO DE GESTIÓN DE USUARIOS
                     case 2:
                         boolean menuUsuario = false;
                         while (!menuUsuario) {
@@ -97,7 +99,10 @@ public class App {
 
                         }
                         break;
+                    // MODULO DE PRESTAMO
                     case 3:
+                        // iniciar el menu en false para que abra y al terminar o querer salir
+                        // habilitarlo como true
                         boolean menuPrestamo = false;
                         while (!menuPrestamo) {
                             System.out.println("\n -----Gestión de Prestamo-----");
@@ -135,8 +140,6 @@ public class App {
                                     break;
                                 case 5:
                                     menuPrestamo = true;
-                                    break;
-                                default:
                                     break;
                             }
 

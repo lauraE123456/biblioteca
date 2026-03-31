@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDate;
+
 import estructuras.ListaEnlazada;
 import estructuras.Nodo;
 import estructuras.Pila;
@@ -13,6 +15,7 @@ public class Biblioteca {
     private ListaEnlazada<Libro> catalogo;
     private ListaEnlazada<Usuario> usuarios;
     private Pila<Libro> historialNuevos; // Para visualizar los ultimos libros agregados
+    private ListaEnlazada<Prestamo> historialPrestamo;
 
     public Biblioteca() {
         // Este es el constructor, donde definimos los datos que son necesarios.
@@ -21,6 +24,7 @@ public class Biblioteca {
         this.historialNuevos = new Pila<>();
         this.contadorLibro = 0;
         this.contadorUsuario = 0;
+        this.historialPrestamo = new ListaEnlazada<>();
     }
 
     public int generarIdUsuario() {
@@ -131,12 +135,20 @@ public class Biblioteca {
         if (libro.getEstado() == EstadoLibro.DISPONIBLE) {
             libro.setEstado(EstadoLibro.PRESTADO);
             libro.setPossedor_id(id_usuario);
+
+            // Agregar al historial de prestamo, para poder visualizar y usar la clase
+            // prestamo
+            String idPrestamo = "P-" + (historialPrestamo.getTamano() + 1);
+
+            Prestamo nuevPrestamo = new Prestamo(idPrestamo, libro.getId(), usuario.getId(), LocalDate.now());
+            historialPrestamo.agregarElemento(nuevPrestamo);
             System.out.println("Libro prestado con éxito al Usuario: " + usuario.getName());
         } else {
             System.out.println("El libro está ocupado. Agregando a " + usuario.getName()
                     + " a la lista de espera del libro " + libro.getName());
             libro.getListaEspera().encolar(usuario);
         }
+
     }
 
     // Metodo para devolver el libro prestado

@@ -2,20 +2,32 @@
     objetivo: sistema de gestión de biblioteca con uso de estructuras lineales.
     - Gestión de Libros
 
-        Registro: Inserción dinámica en la Lista Enlazada.
+        Registro Libro: Inserción dinámica en la Lista Enlazada.
 
-        Búsqueda: Recorrido secuencial de la lista por ISBN o Título.
+        Ver Libro: Muestra la lista actual de los libros que estan en el sistema.
 
-        Préstamo: Cambio de estado de DISPONIBLE a PRESTADO y asignación de poseedor_id.
+        Borrar Libro: Pedirle al usuario el ID del libro a eliminar y borrar de la lista
 
         Devolución: Reintegración al stock y liberación del usuario.
     - Gestión de Usuarios
 
-        Registro/Actualización: Manejo de nodos en la lista de usuarios.
+        Registro Usuarios: Manejo de nodos en la lista de usuarios.
 
-        Eliminación: Desvinculación de nodos (ajuste de punteros next).
+        Ver Usuarios: Muestra la lista de los usuarios y con los libros que tiene en uso
+
+        Borrar Usuario: Elimina usuario, preguntado el id del usuario, valida si exite lo elimina, si no existe muestra un error
+    - Gestión de Prestamo
+
+        Prestar libro: Pide al usuario el id del libro y el id del usuario.
+
+        Devolver Libro : Aqui desencolamos el libro y lo habilitamos como disponible cuando lo devuelven
+
+        Ver Lista Espera: Aqui hacemos uso de un nodo, que es la cabeza principal donde nos muestra quien llego de primeras y quien va a ocupar el libro de primera
+
+        Ver ultima acción: Muestra el historial de los libros y cual fue el ultimo en ser devuelto o cual fue su ultima accion
+
 2. estructuras de datos a usar, orden:
-    1. lista enlazada-> para tener el catalogo de libros, insertar y eliminar objetos en cualquier posición (base de datos para usuarios o libros )
+    1. lista enlazada-> para tener el catalogo de libros, insertar y eliminar objetos en cualquier posición . Uso de nodo, realizando una simulacion con la lista, aqui se creo una variable cabeza a la cual se iba haciendo una modificacion, al que llegaba, se asignaba como el siguiente y asi sucesivamente
     2. cola-> gestión de Turnos y Reservas, respetar el orden de llegada debe respetarse, primero en llegar primero en salir(Firts In Firsts Out)
     3. pila-> para control de historial de actividad, ver el ultimo libro que ingreso al sistema, o la ultima modificacion 
     

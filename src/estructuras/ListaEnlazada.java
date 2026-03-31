@@ -71,4 +71,14 @@ public class ListaEnlazada<T> {
         return cabeza;
     }
 
+    public int getTamano() {
+        int count = 0;
+        Nodo<T> actual = cabeza;
+        while (actual != null) {
+            count++;
+            actual = actual.getSiguiente();
+        }
+        return count;
+    }
+
 }
