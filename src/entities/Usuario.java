@@ -23,10 +23,15 @@ public class Usuario {
         return name;
     }
 
+    // Obtener los libros prestado
+    public List<Libro> getLibrosPrestados() {
+        return libros_prestados;
+    }
+
     @Override
     public String toString() {
         return "Usuario [id_usuario=" + id_usuario + ", name=" + name + ", email=" + email + ", libros_prestados="
-                + libros_prestados + telefono + "]";
+                + libros_prestados + "Telefono=" + telefono + "]";
     }
 
     public int getId() {

@@ -107,7 +107,7 @@ public class App {
                         while (!menuPrestamo) {
                             System.out.println("\n -----Gestión de Prestamo-----");
                             System.out.println(
-                                    "1. Prestar libro \n2. Devolver libro \n3. Ver lista de Espera   \n4. Ver ultimas acciones\n5. Volver al Menú Principal");
+                                    "1. Prestar libro \n2. Devolver libro \n3. Ver lista de Espera   \n4. Ver ultimas acciones\n5. Ver historial de préstamos\n6. Volver al Menú Principal");
                             int opcionPrestamo = sc.nextInt();
                             sc.nextLine();
                             int id_usuario;
@@ -139,6 +139,9 @@ public class App {
                                     b.mostrarUltimaAccion();
                                     break;
                                 case 5:
+                                    b.verHistorialPrestamos();
+                                    break;
+                                case 6:
                                     menuPrestamo = true;
                                     break;
                             }

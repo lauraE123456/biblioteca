@@ -142,6 +142,10 @@ public class Biblioteca {
 
             Prestamo nuevPrestamo = new Prestamo(idPrestamo, libro.getId(), usuario.getId(), LocalDate.now());
             historialPrestamo.agregarElemento(nuevPrestamo);
+
+            // AGREGADO: Añadir el libro a la lista de libros prestados del usuario
+            usuario.getLibrosPrestados().add(libro);
+
             System.out.println("Libro prestado con éxito al Usuario: " + usuario.getName());
         } else {
             System.out.println("El libro está ocupado. Agregando a " + usuario.getName()
@@ -154,8 +158,14 @@ public class Biblioteca {
     // Metodo para devolver el libro prestado
     public void devolverLibro(int id_libro, int id_usuario) {
         Libro libro = buscarLibroPorId(id_libro);
+        Usuario usuarioActual = buscarUsuarioPorId(id_usuario);
 
         if (libro != null && libro.getEstado() == EstadoLibro.PRESTADO) {
+            // AGREGADO: Quitar el libro de la lista del usuario que lo devuelve
+            if (usuarioActual != null) {
+                usuarioActual.getLibrosPrestados().remove(libro);
+            }
+
             // Revisamos si hay alguien esperando ESTE libro
             Usuario siguienteUsuario = libro.getListaEspera().desencolar();
 
@@ -163,6 +173,8 @@ public class Biblioteca {
                 System.out.println("El libro devuelto ha sido asignado automáticamente a " + siguienteUsuario.getName()
                         + " que estaba en la lista de espera.");
                 libro.setPossedor_id(siguienteUsuario.getId());
+                // AGREGADO: Añadir el libro a la lista del nuevo usuario
+                siguienteUsuario.getLibrosPrestados().add(libro);
                 // El estado sigue siendo PRESTADO
             } else {
                 libro.setEstado(EstadoLibro.DISPONIBLE);
@@ -176,14 +188,14 @@ public class Biblioteca {
 
     public void verListaEspera() {
         Nodo<Libro> actual = catalogo.getCabeza();
-        boolean hayEspera = false;
+        boolean hayEspera = true;
 
         while (actual != null) {
             Libro libro = actual.getDato();
             if (libro.getListaEspera().verPrimero() != null) {
                 System.out.println("\n--- Esperando por el libro: " + libro.getName() + " ---");
                 libro.getListaEspera().imprimirCola();
-                hayEspera = true;
+                hayEspera = false;
             }
             actual = actual.getSiguiente();
         }
@@ -197,6 +209,15 @@ public class Biblioteca {
         Libro ultimo = historialNuevos.verUltimo();
         if (ultimo != null) {
             System.out.println(ultimo.toString());
+        }
+    }
+
+    public void verHistorialPrestamos() {
+        System.out.println("\n--- Historial de Préstamos ---");
+        if (historialPrestamo.getCabeza() == null) {
+            System.out.println("No hay préstamos registrados.");
+        } else {
+            historialPrestamo.imprimirElementos();
         }
     }
 }
