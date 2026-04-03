@@ -2,30 +2,29 @@ package entities;
 
 import java.time.LocalDate;
 
-
 public class Prestamo {
 
     // Definir los atributos privados
-    private String id_prestamo;
-    private String isbn;
-    private String id_usuario;
+    private String idPrestamo;
+    private int isbn;
+    private int idUsuario;
     private LocalDate fecha;
 
-    //Generar el constructor de la clase Prestamo
-    public Prestamo(String id_prestamo, String isbn, String id_usuario, LocalDate fecha) {
-        this.id_prestamo=id_prestamo;
+    // Generar el constructor de la clase Prestamo
+    public Prestamo(String id_prestamo, int isbn, int id_usuario, LocalDate fecha) {
+        this.idPrestamo = id_prestamo;
         this.isbn = isbn;
-        this.id_usuario = id_usuario;
-        this.fecha= fecha;
+        this.idUsuario = id_usuario;
+        this.fecha = fecha;
     }
 
     public String getName() {
-        return id_prestamo;
+        return idPrestamo;
     }
 
     @Override
     public String toString() {
-        return "Prestamo [id_prestamo=" + id_prestamo + ", isbn=" + isbn + ", id_usuario=" + id_usuario + ", fecha="
+        return "Prestamo [id_prestamo=" + idPrestamo + ", isbn=" + isbn + ", id_usuario=" + idUsuario + ", fecha="
                 + fecha + "]";
     }
 

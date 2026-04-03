@@ -66,9 +66,19 @@ public class ListaEnlazada<T> {
 
     }
 
-    // Obtener cabeza (para recorrer desde fuera)
+    // Obtener cabeza (para recorrer fuera de esta clase)
     public Nodo<T> getCabeza() {
         return cabeza;
+    }
+
+    public int getTamano() {
+        int count = 0;
+        Nodo<T> actual = cabeza;
+        while (actual != null) {
+            count++;
+            actual = actual.getSiguiente();
+        }
+        return count;
     }
 
 }

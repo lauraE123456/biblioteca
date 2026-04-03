@@ -1,29 +1,41 @@
 package entities;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
     // definir atributos privados
 
-    private String id_usuario;
-    private String name;
-    private String email;
-    private List<Libro> libros_prestados = new ArrayList<Libro>();
+    private int idUsuario;
+    private String nombreUsuario;
+    private String correoElectronico;
+    private String numeroTelefono;
+    private List<Libro> librosPrestados = new ArrayList<Libro>();
 
-    public Usuario(String id_usuario, String name, String email) {
-        this.id_usuario=id_usuario;
-        this.name=name;
-        this.email=email;
+    public Usuario(int idUsuario, String nombreUsuario, String correoElectronico, String numeroTelefono) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.correoElectronico = correoElectronico;
+        this.numeroTelefono = numeroTelefono;
     }
 
     public String getName() {
-        return name;
+        return nombreUsuario;
+    }
+
+    // Obtener los libros prestado
+    public List<Libro> getLibrosPrestados() {
+        return librosPrestados;
     }
 
     @Override
     public String toString() {
-        return "Usuario [id_usuario=" + id_usuario + ", name=" + name + ", email=" + email + ", libros_prestados="
-                + libros_prestados + "]";
+        return "Usuario [id_usuario=" + idUsuario + ", name=" + nombreUsuario + ", email=" + correoElectronico + ", libros_prestados="
+                + librosPrestados + "Telefono=" + numeroTelefono + "]";
+    }
+
+    public int getId() {
+        return idUsuario;
     }
 
 }
