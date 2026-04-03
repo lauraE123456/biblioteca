@@ -45,7 +45,7 @@
      id_usuario int
      nombre String
      email String
-     telefono int
+     telefono String
      libros_prestados
    - Clase Prestamo
      id_prestamo String

@@ -88,7 +88,7 @@ public class App {
                                     System.out.println("Email del usuario:");
                                     String email = sc.nextLine();
                                     System.out.println("Telefono del usuario:");
-                                    int telefono = sc.nextInt();
+                                    int telefono = sc.nextLine();
 
                                     // agregar usuario llamando a la clase usuario
                                     Usuario usuario = new Usuario(id_usuario, nombre, email, telefono);
