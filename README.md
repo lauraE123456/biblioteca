@@ -36,22 +36,22 @@
 3. Diseñar como se organizara la información, definir que datos seran almacenados
    - Definir clase Libro
      isbn int
-     titulo String
-     autor String
-     estado:Enum
-     poseedor_id
+     tituloLibro String
+     autorLibro String
+     estadoLibro:Enum
+     poseedorId
 
    - Definir clase Usuario
-     id_usuario int
-     nombre String
-     email String
-     telefono String
-     libros_prestados
+     idUsuario int
+     nombreUsuario String
+     correoElectronico String
+     numeroTelefono String
+     librosPrestados
    - Clase Prestamo
-     id_prestamo String
+     idPrestamo String
      isbn int
-     id_usuario int
-     fecha date
+     idUsuario int
+     fecha LocalDate
    - Clase Biblioteca
      conteine metodos para cada uno de sus modulos y son los siguientes:
      _---Modulo Usuario---_
@@ -79,3 +79,5 @@
    3. Módulo Prestamo: (Prestar, Devolver).
 
 6. Pruebas y depuracion
+
+Archivo PruebasSistema.java
