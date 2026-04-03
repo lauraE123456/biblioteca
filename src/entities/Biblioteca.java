@@ -210,7 +210,7 @@ public class Biblioteca {
             actual = actual.getSiguiente();
         }
 
-        if (!hayEspera) {
+        if (hayEspera) {
             System.out.println("No hay usuarios en lista de espera para ningún libro.");
         }
     }
