@@ -33,15 +33,18 @@ public class App {
                             System.out.println("\n---- Por favor elija una de las acciones que desea hacer hoy ----");
                             System.out.println(
                                     "1. Ver Catálogo \n2. Agregar Libro \n3. Borrar Libro \n4. Volver al Menú Principal");
+                            System.out.print("Por favor, digita una opción: ");
                             int opcionLibros = sc.nextInt();
                             sc.nextLine(); // limpiar despues de leer un entero
 
                             switch (opcionLibros) {
                                 case 1:
+                                    System.out.println("\n---- Catálogo de Libros ----");
                                     b.verCatalogo();
                                     break;
                                 case 2:
                                     int id_libro = b.generarIdLibro();
+                                    System.out.println("\n---- Vamos a agregar un libro: ----");
                                     System.out.println("\n---- Por favor ingrese: ----");
                                     System.out.print("Título del libro: ");
                                     String titulo = sc.nextLine();
@@ -53,12 +56,14 @@ public class App {
                                     System.out.println("Libro agregado con éxito.");
                                     break;
                                 case 3:
+                                    System.out.println("\n---- Vamos a borrar un libro: ----");
                                     System.out.print("Ingrese el ID a eliminar: ");
                                     int id = sc.nextInt();
                                     sc.nextLine(); // limpiar despues de leer un entero
                                     b.borrarLibro(id);
                                     break;
                                 case 4:
+                                    System.out.print("Saliendo del menú de libros...\n");
                                     menuLibro = true;
                                     break;
                                 default:
@@ -75,6 +80,7 @@ public class App {
                             System.out.println("\n---- Por favor elija una de las acciones que desea hacer hoy ----");
                             System.out.println(
                                     "1. Ver Usuario \n2. Agregar Usuario \n3. Borrar Usuario  \n4. Volver al Menú Principal");
+                            System.out.print("Por favor, digita una opción: ");
                             int opcionUsuario = sc.nextInt();
                             sc.nextLine(); // !!! LIMPIAR BÚFER
                             switch (opcionUsuario) {
@@ -82,25 +88,28 @@ public class App {
                                     b.verUsuarios();
                                     break;
                                 case 2:
+                                    System.out.print("Agregar Usuario: \n");
                                     int id_usuario = b.generarIdUsuario();
                                     System.out.println("Nombre del usuario:");
                                     String nombre = sc.nextLine();
                                     System.out.println("Email del usuario:");
                                     String email = sc.nextLine();
                                     System.out.println("Telefono del usuario:");
-                                    int telefono = sc.nextLine();
+                                    String telefono = sc.nextLine();
 
                                     // agregar usuario llamando a la clase usuario
                                     Usuario usuario = new Usuario(id_usuario, nombre, email, telefono);
                                     b.agregarUsuarios(usuario);
                                     break;
                                 case 3:
+                                    System.out.print("Borrar Usuario: \n");
                                     System.out.print("Ingrese el ID del usuario a eliminar: ");
                                     int id = sc.nextInt();
                                     sc.nextLine(); // !!! LIMPIAR BÚFER
                                     b.borrarUsuario(id);
                                     break;
                                 case 4:
+                                    System.out.print("Saliendo del menú de usuarios...\n");
                                     menuUsuario = true;
                                     break;
                                 default:
@@ -119,6 +128,7 @@ public class App {
                             System.out.println("\n -----Gestión de Prestamo-----");
                             System.out.println(
                                     "1. Prestar libro \n2. Devolver libro \n3. Ver lista de Espera   \n4. Ver ultimas acciones\n5. Ver historial de préstamos\n6. Volver al Menú Principal");
+                            System.out.print("Por favor, digita una opción: ");
                             int opcionPrestamo = sc.nextInt();
                             sc.nextLine();
                             int id_usuario;
@@ -135,6 +145,7 @@ public class App {
                                     b.prestarLibro(id_usuario, id_libro);
                                     break;
                                 case 2:
+                                    System.out.print("Devolver libro: \n");
                                     System.out.println(" ID Usuario:");
                                     id_usuario = sc.nextInt();
                                     System.out.println("ID Libro");
@@ -150,9 +161,11 @@ public class App {
                                     b.mostrarUltimaAccion();
                                     break;
                                 case 5:
+                                    System.out.print("Estas son las acciones de prestamos realizadas:");
                                     b.verHistorialPrestamos();
                                     break;
                                 case 6:
+                                    System.out.print("Saliendo del menú de préstamos...\n");
                                     menuPrestamo = true;
                                     break;
                                 default:
@@ -164,6 +177,7 @@ public class App {
 
                     case 0:
                         System.out.println("Saliendo del sistema...");
+                        System.out.println("Gracias por usar el sistema.");
                         break;
                     default:
                         System.out.println("Opción no válida.");
