@@ -12,15 +12,15 @@ public class Biblioteca {
     private int contadorUsuario;
     // Definir atributos privados
 
-    private ListaEnlazada<Libro> catalogo;
-    private ListaEnlazada<Usuario> usuarios;
+    private ListaEnlazada<Libro> catalogoLibros;
+    private ListaEnlazada<Usuario> listaUsuarios;
     private Pila<Libro> historialNuevos; // Para visualizar los ultimos libros agregados
     private ListaEnlazada<Prestamo> historialPrestamo;
 
     public Biblioteca() {
         // Este es el constructor, donde definimos los datos que son necesarios.
-        this.catalogo = new ListaEnlazada<>();
-        this.usuarios = new ListaEnlazada<>();
+        this.catalogoLibros = new ListaEnlazada<>();
+        this.listaUsuarios = new ListaEnlazada<>();
         this.historialNuevos = new Pila<>();
         this.contadorLibro = 0;
         this.contadorUsuario = 0;
@@ -36,7 +36,7 @@ public class Biblioteca {
     public void agregarLibro(Libro libro) {
         // int id_libro = generar_nuevo_id();
         // libro.getId(id_libro);
-        catalogo.agregarElemento(libro);
+        catalogoLibros.agregarElemento(libro);
         historialNuevos.apilar(libro);
         System.out.println("Libro creado correctamente");
 
@@ -44,7 +44,7 @@ public class Biblioteca {
 
     // metodos para ver la lista de libros
     public void verCatalogo() {
-        catalogo.imprimirElementos();
+        catalogoLibros.imprimirElementos();
     }
 
     // Actualizar datos de un libro
@@ -53,7 +53,7 @@ public class Biblioteca {
     }
 
     public Libro buscarLibroPorId(int id) {
-        Nodo<Libro> actual = catalogo.getCabeza();
+        Nodo<Libro> actual = catalogoLibros.getCabeza();
 
         while (actual != null) {
             Libro libro = actual.getDato();
@@ -72,7 +72,7 @@ public class Biblioteca {
     public void borrarLibro(int id_dato) {
         Libro libroAEliminar = buscarLibroPorId(id_dato);
         if (libroAEliminar != null) {
-            catalogo.eliminarElemento(libroAEliminar);
+            catalogoLibros.eliminarElemento(libroAEliminar);
         } else {
             System.out.println("Libro no encontrado");
         }
@@ -80,7 +80,7 @@ public class Biblioteca {
 
     // Metodo para ver usuarios
     public void verUsuarios() {
-        usuarios.imprimirElementos();
+        listaUsuarios.imprimirElementos();
     }
 
     //---Modulo Usurarios
@@ -91,14 +91,14 @@ public class Biblioteca {
 
     // Creación de metodo para Gestion de Usuarios
     public void agregarUsuarios(Usuario usuario) {
-        usuarios.agregarElemento(usuario);
+        listaUsuarios.agregarElemento(usuario);
         System.out.println("Usuario creado correctamente");
     }
 
     // Metodo para buscar usuario por id, usamos el nodo para obtener el 
     // primer elemento de la lista
     public Usuario buscarUsuarioPorId(int id) {
-        Nodo<Usuario> actual = usuarios.getCabeza();
+        Nodo<Usuario> actual = listaUsuarios.getCabeza();
 
         while (actual != null) {
             Usuario usuario = actual.getDato();
@@ -117,7 +117,7 @@ public class Biblioteca {
     public void borrarUsuario(int id_dato) {
         Usuario usuarioAEliminar = buscarUsuarioPorId(id_dato);
         if (usuarioAEliminar != null) {
-            usuarios.eliminarElemento(usuarioAEliminar);
+            listaUsuarios.eliminarElemento(usuarioAEliminar);
         } else {
             System.out.println("Usuario no encontrado");
         }
@@ -197,7 +197,7 @@ public class Biblioteca {
     */
 
     public void verListaEspera() {
-        Nodo<Libro> actual = catalogo.getCabeza();
+        Nodo<Libro> actual = catalogoLibros.getCabeza();
         boolean hayEspera = true;
 
         while (actual != null) {

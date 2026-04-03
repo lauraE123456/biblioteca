@@ -17,7 +17,7 @@ public class App {
                 System.out.println("\n-----¿Qué deseas hacer hoy?-----");
                 System.out.println("1. Gestión Libros");
                 System.out.println("2. Gestión Usuarios");
-                System.out.println("3. Gestión Historial Préstamo");
+                System.out.println("3. Gestión Préstamo");
                 System.out.println("0. Salir");
                 System.out.print("Por favor, digita una opción: ");
 
@@ -43,15 +43,15 @@ public class App {
                                     b.verCatalogo();
                                     break;
                                 case 2:
-                                    int id_libro = b.generarIdLibro();
+                                    int idLibro = b.generarIdLibro();
                                     System.out.println("\n---- Vamos a agregar un libro: ----");
                                     System.out.println("\n---- Por favor ingrese: ----");
                                     System.out.print("Título del libro: ");
-                                    String titulo = sc.nextLine();
+                                    String tituloLibro = sc.nextLine();
                                     System.out.print("Autor del libro: ");
-                                    String autor = sc.nextLine();
+                                    String autorLibro = sc.nextLine();
 
-                                    Libro l = new Libro(id_libro, titulo, autor);
+                                    Libro l = new Libro(idLibro, tituloLibro, autorLibro);
                                     b.agregarLibro(l);
                                     System.out.println("Libro agregado con éxito.");
                                     break;
@@ -83,30 +83,31 @@ public class App {
                             System.out.print("Por favor, digita una opción: ");
                             int opcionUsuario = sc.nextInt();
                             sc.nextLine(); // !!! LIMPIAR BÚFER
+                            int idUsuario;
                             switch (opcionUsuario) {
                                 case 1:
                                     b.verUsuarios();
                                     break;
                                 case 2:
                                     System.out.print("Agregar Usuario: \n");
-                                    int id_usuario = b.generarIdUsuario();
+                                    idUsuario = b.generarIdUsuario();
                                     System.out.println("Nombre del usuario:");
-                                    String nombre = sc.nextLine();
+                                    String nombreUsuario = sc.nextLine();
                                     System.out.println("Email del usuario:");
-                                    String email = sc.nextLine();
+                                    String correoElectronico = sc.nextLine();
                                     System.out.println("Telefono del usuario:");
-                                    String telefono = sc.nextLine();
+                                    String numeroTelefono = sc.nextLine();
 
                                     // agregar usuario llamando a la clase usuario
-                                    Usuario usuario = new Usuario(id_usuario, nombre, email, telefono);
+                                    Usuario usuario = new Usuario(idUsuario, nombreUsuario, correoElectronico, numeroTelefono);
                                     b.agregarUsuarios(usuario);
                                     break;
                                 case 3:
                                     System.out.print("Borrar Usuario: \n");
                                     System.out.print("Ingrese el ID del usuario a eliminar: ");
-                                    int id = sc.nextInt();
+                                    idUsuario= sc.nextInt();
                                     sc.nextLine(); // !!! LIMPIAR BÚFER
-                                    b.borrarUsuario(id);
+                                    b.borrarUsuario(idUsuario);
                                     break;
                                 case 4:
                                     System.out.print("Saliendo del menú de usuarios...\n");
@@ -131,26 +132,26 @@ public class App {
                             System.out.print("Por favor, digita una opción: ");
                             int opcionPrestamo = sc.nextInt();
                             sc.nextLine();
-                            int id_usuario;
-                            int id_libro;
+                            int idUsuario;
+                            int idLibro;
                             switch (opcionPrestamo) {
                                 case 1:
                                     System.out.println(
                                             "--------Bienvenido a la sesión de prestar.-------- \n por favor, Ingrese:");
                                     System.out.println(" ID Usuario:");
-                                    id_usuario = sc.nextInt();
+                                    idUsuario = sc.nextInt();
                                     System.out.println("ID Libro");
-                                    id_libro = sc.nextInt();
+                                    idLibro = sc.nextInt();
 
-                                    b.prestarLibro(id_usuario, id_libro);
+                                    b.prestarLibro(idUsuario, idLibro);
                                     break;
                                 case 2:
                                     System.out.print("Devolver libro: \n");
                                     System.out.println(" ID Usuario:");
-                                    id_usuario = sc.nextInt();
+                                    idUsuario = sc.nextInt();
                                     System.out.println("ID Libro");
-                                    id_libro = sc.nextInt();
-                                    b.devolverLibro(id_libro, id_usuario);
+                                    idLibro = sc.nextInt();
+                                    b.devolverLibro(idLibro, idUsuario);
                                     break;
                                 case 3:
                                     System.out.println("Esta es la lista de espera:");
