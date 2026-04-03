@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Pila<T> {
 
     // Crear atributo privado
-    // Usamos el estandar de clase T para poder de forma universal
+    // Usamos el estandar de clase T para poder usar de forma universal
     private Stack<T> historial = new Stack<>();
 
     // Nuevo metodo para agregar un libro al historial

@@ -7,12 +7,14 @@ import entities.Usuario;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+        // llamado de la clase biblioteca y hacer uso de sus metodos
         Biblioteca b = new Biblioteca();
         int opcion = 0;
         // do-while para que el menú se muestre al menos una vez
         do {
             try {
                 System.out.println("\n-----Bienvenido al sistema de gestión de biblioteca-----");
+                System.out.println("\n-----¿Qué deseas hacer hoy?-----");
                 System.out.println("1. Gestión Libros");
                 System.out.println("2. Gestión Usuarios");
                 System.out.println("3. Gestión Historial Préstamo");
@@ -20,7 +22,7 @@ public class App {
                 System.out.print("Por favor, digita una opción: ");
 
                 opcion = sc.nextInt();
-                sc.nextLine(); // !!! LIMPIAR BÚFER después de nextInt()
+                sc.nextLine(); // limpiar despues de leer un entero
 
                 switch (opcion) {
                     // MODULO GESTIÓN DE LIBROS
@@ -28,10 +30,11 @@ public class App {
                         boolean menuLibro = false;
                         while (!menuLibro) {
                             System.out.println("\n---- Gestión de Libros ----");
+                            System.out.println("\n---- Por favor elija una de las acciones que desea hacer hoy ----");
                             System.out.println(
                                     "1. Ver Catálogo \n2. Agregar Libro \n3. Borrar Libro \n4. Volver al Menú Principal");
                             int opcionLibros = sc.nextInt();
-                            sc.nextLine(); // !!! LIMPIAR BÚFER
+                            sc.nextLine(); // limpiar despues de leer un entero
 
                             switch (opcionLibros) {
                                 case 1:
@@ -39,6 +42,7 @@ public class App {
                                     break;
                                 case 2:
                                     int id_libro = b.generarIdLibro();
+                                    System.out.println("\n---- Por favor ingrese: ----");
                                     System.out.print("Título del libro: ");
                                     String titulo = sc.nextLine();
                                     System.out.print("Autor del libro: ");
@@ -51,11 +55,14 @@ public class App {
                                 case 3:
                                     System.out.print("Ingrese el ID a eliminar: ");
                                     int id = sc.nextInt();
-                                    sc.nextLine(); // !!! LIMPIAR BÚFER
+                                    sc.nextLine(); // limpiar despues de leer un entero
                                     b.borrarLibro(id);
                                     break;
                                 case 4:
                                     menuLibro = true;
+                                    break;
+                                default:
+                                    System.out.println("Opción no válida.");
                                     break;
                             }
                         }
@@ -65,6 +72,7 @@ public class App {
                         boolean menuUsuario = false;
                         while (!menuUsuario) {
                             System.out.println("\n---- Gestión de Usuarios ----");
+                            System.out.println("\n---- Por favor elija una de las acciones que desea hacer hoy ----");
                             System.out.println(
                                     "1. Ver Usuario \n2. Agregar Usuario \n3. Borrar Usuario  \n4. Volver al Menú Principal");
                             int opcionUsuario = sc.nextInt();
@@ -94,6 +102,9 @@ public class App {
                                     break;
                                 case 4:
                                     menuUsuario = true;
+                                    break;
+                                default:
+                                    System.out.println("Opción no válida.");
                                     break;
                             }
 
@@ -143,6 +154,9 @@ public class App {
                                     break;
                                 case 6:
                                     menuPrestamo = true;
+                                    break;
+                                default:
+                                    System.out.println("Opción no válida.");
                                     break;
                             }
 

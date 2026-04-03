@@ -27,10 +27,7 @@ public class Biblioteca {
         this.historialPrestamo = new ListaEnlazada<>();
     }
 
-    public int generarIdUsuario() {
-        return ++contadorLibro;
-    }
-
+    //--- Modulo Libro
     public int generarIdLibro() {
         return ++contadorUsuario;
     }
@@ -45,6 +42,7 @@ public class Biblioteca {
 
     }
 
+    // metodos para ver la lista de libros
     public void verCatalogo() {
         catalogo.imprimirElementos();
     }
@@ -85,13 +83,20 @@ public class Biblioteca {
         usuarios.imprimirElementos();
     }
 
+    //---Modulo Usurarios
+    // metodo para generar un id haciendo uso de un contador
+    public int generarIdUsuario() {
+        return ++contadorLibro;
+    }
+
     // Creación de metodo para Gestion de Usuarios
     public void agregarUsuarios(Usuario usuario) {
         usuarios.agregarElemento(usuario);
         System.out.println("Usuario creado correctamente");
     }
 
-    // Metodo para buscar usuario por id
+    // Metodo para buscar usuario por id, usamos el nodo para obtener el 
+    // primer elemento de la lista
     public Usuario buscarUsuarioPorId(int id) {
         Nodo<Usuario> actual = usuarios.getCabeza();
 
@@ -185,6 +190,11 @@ public class Biblioteca {
             System.out.println("El libro no estaba prestado o no existe.");
         }
     }
+
+
+    /* ver lista de espera cuando un usuario desea o quiere el libro que 
+    ya esta prestado, ingresa a la lista de espera
+    */
 
     public void verListaEspera() {
         Nodo<Libro> actual = catalogo.getCabeza();
